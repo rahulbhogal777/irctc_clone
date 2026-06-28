@@ -24,22 +24,26 @@ function Navbar() {
     // return () => clearInterval(timer);
   }, []);
 
+  
+
   return (
     <>
       <nav className={styles.navbar}>
         {/* Logo */}
-        <div className={styles.logoContainer}>
-          <img src={trainLogo} alt="Train Logo" className={styles.logo} />
-          <span className={styles.logoText}>IRCTC Clone</span>
-        </div>
+        <Link to="/" className={ styles.logoLink}>
+          <div className={styles.logoContainer}>
+            <img src={trainLogo} alt="Train Logo" className={styles.logo} />
+            <span className={styles.logoText}>IRCTC Clone</span>
+          </div>
+        </Link>
 
         {/* Navigation */}
         <div className={styles.navLinks}>
-          <Link to="/" className={styles.navLink}>
+          <Link to="/booking" className={styles.navLink}>
             Booking
           </Link>
 
-          <Link to="/" className={styles.navLink}>
+          <Link to="/contact" className={styles.navLink}>
             Contact Us
           </Link>
         </div>
