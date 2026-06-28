@@ -5,6 +5,8 @@ import { Link, Outlet } from "react-router-dom";
 
 import trainLogo from "../assets/trainLogo.webp";
 import styles from "../styles/Navbar.module.css";
+import irctcLogo from "../assets/irctcLogo.jpg";
+import Footer from "./Footer";
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -74,8 +76,16 @@ function Navbar() {
             </>
           )}
         </div>
+
+        {/* IRCTC LOGO */}
+        <div>
+          <img alt="IRCTC logo" src={irctcLogo} className={styles.irctcLogo} />
+        </div>
       </nav>
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
     </>
   );
 }

@@ -11,7 +11,7 @@ function App() {
         {
           index: true,
           element: <Home/>
-        }
+        },
       ]
 
     }
