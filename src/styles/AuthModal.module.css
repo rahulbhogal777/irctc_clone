@@ -1,0 +1,138 @@
+/* Modal Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 9999;
+}
+
+/* Show modal when active */
+.overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Box (Container) */
+.modal {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* Close button styling */
+.closeBtn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #666;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+/* Hover effect on the close button */
+.closeBtn:hover{
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Input Fields (Email, Password, etc.) */
+/* Common styling for input fields */
+.modal input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Submiy & Google Login Button */
+
+
+/* General button styling */
+.modal button{
+    width: 100%;
+    padding: 10px;
+    background: rgb((246), 236, 236);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Hover effect for login/register buttons */
+.modal button:hover {
+    background: #f47825;
+    color: white;
+}
+
+/* Google Authentication button */
+.googleBtn {
+    width: 100%;
+    padding: 10px;
+    background: #db4437;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Hover effect for google button */
+.googleBtn:hover {
+    background: #c1351d;
+}
+
+/* Toggle text (Login <->Register) */
+.modal p {
+    margin-top: 15px;
+    color: #ff6600;
+    cursor: pointer;
+}
+
+/* Hover effect for toggle link */
+.modal p:hover{
+    text-decoration: underline;
+}
+
+/* Error message displayed for invalid login credentials */
+.error {
+    color: red;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* When buttons are disabled (e.g., during API calls */
+button:disabled{
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+

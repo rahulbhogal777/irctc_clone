@@ -30,7 +30,7 @@ function Navbar() {
     <>
       <nav className={styles.navbar}>
         {/* Logo */}
-        <Link to="/" className={ styles.logoLink}>
+        <Link to="/" className={styles.logoLink}>
           <div className={styles.logoContainer}>
             <img src={trainLogo} alt="Train Logo" className={styles.logo} />
             <span className={styles.logoText}>IRCTC Clone</span>
@@ -72,11 +72,15 @@ function Navbar() {
             </>
           ) : (
             <>
-              <button className={styles.authButton} onClick={handleLogin}>
-                Login
-              </button>
+              <Link to="/login">
+                <button className={styles.authButton} onClick={handleLogin}>
+                  Login
+                </button>
+              </Link>
 
-              <button className={styles.registerButton}>Register</button>
+              <Link to="/register">
+                <button className={styles.registerButton}>Register</button>
+              </Link>
             </>
           )}
         </div>

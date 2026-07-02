@@ -1,10 +1,16 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
 import Booking from "./pages/BookingPage";
 import Contact from "./pages/ContactPage";
+import Home from "./pages/Home";
+import Login from "./pages/LoginModal";
+import Register from "./pages/RegisterModal";
 
 function App() {
+  
   const router = createBrowserRouter([
     {
       path: "/",
@@ -12,24 +18,31 @@ function App() {
       children: [
         {
           index: true,
-          element: <Home/>
+          element: <Home />,
         },
         {
           path: "booking",
-          Component: Booking
+          element: <Booking />,
         },
         {
           path: "contact",
-          Component: Contact
-        }
-      ]
-
-    }
+          element: <Contact />,
+        },
+        {
+          path: "login",
+          element: <Login isOpen={true} />,
+        },
+        {
+          path: "register",
+          element: <Register />,
+        },
+      ],
+    },
   ]);
 
   return (
     <>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </>
   );
 }
