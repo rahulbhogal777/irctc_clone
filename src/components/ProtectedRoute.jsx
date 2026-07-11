@@ -1,8 +1,9 @@
 import { Children } from "react";
 import { useAuth } from "../context/authContext";
+import { Navigate } from "react-router-dom";
 
 // component to protect route that requires authentication      
-const protectedRouter = ({ Children }) => {
+const ProtectedRoute = ({ Children }) => {
     //get auth state  from authContext
     const { currentUser, loading } = useAuth;
 
@@ -11,5 +12,12 @@ const protectedRouter = ({ Children }) => {
     }
 
     // if no user logged in, redirect to the home page
-    if(!currentUser){}
+    if (!currentUser) {
+        return <Navigate to="/"></Navigate>
+    }
+
+    // not loading, use is authenticated, render the protected component
+    return Children;
 }
+
+export default ProtectedRoute;

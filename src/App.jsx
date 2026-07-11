@@ -1,6 +1,7 @@
 import {
   createBrowserRouter,
-  RouterProvider
+  RouterProvider,
+  useNavigate
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Booking from "./pages/BookingPage";
@@ -10,6 +11,8 @@ import Login from "./pages/LoginModal";
 import Register from "./pages/RegisterModal";
 
 function App() {
+
+  
   
   const router = createBrowserRouter([
     {
@@ -30,11 +33,11 @@ function App() {
         },
         {
           path: "login",
-          element: <Login isOpen={true} />,
+          element: <Login isOpen={true}  />,
         },
         {
           path: "register",
-          element: <Register />,
+          element: <Register isOpen={true}  />,
         },
       ],
     },

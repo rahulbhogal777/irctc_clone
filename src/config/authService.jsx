@@ -68,6 +68,6 @@ export const logout = async () => {
 }
 
 // Listern for auth state change
-export const observeAuthState = (callback) => {
+export const observeAuthState = async (callback) => {
     return await onAuthStateChanged(auth, callback);
 }
