@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
 import { IoIosNotifications } from "react-icons/io";
 import { MdOutlineHelp } from "react-icons/md";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 import trainLogo from "../assets/trainLogo.webp";
-import styles from "../styles/Navbar.module.css";
 import irctcLogo from "../assets/irctcLogo.jpg";
+import styles from "../styles/Navbar.module.css";
 import Footer from "./Footer";
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
 
+  const navigate = useNavigate();
+
   const handleLogin = () => {
-    setIsLoggedIn((prev) => !prev);
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
   };
 
   useEffect(() => {
@@ -21,10 +27,8 @@ function Navbar() {
       setCurrentTime(new Date());
     }, 1000);
 
-    // return () => clearInterval(timer);
+    return () => clearInterval(timer);
   }, []);
-
-  
 
   return (
     <>
@@ -66,16 +70,14 @@ function Navbar() {
             <>
               <span className={styles.welcome}>Welcome User</span>
 
-              <button className={styles.authButton} onClick={handleLogin}>
+              <button className={styles.authButton} onClick={handleLogout}>
                 Logout
               </button>
             </>
           ) : (
             <>
               <Link to="/login">
-                <button className={styles.authButton} onClick={handleLogin}>
-                  Login
-                </button>
+                <button className={styles.authButton}>Login</button>
               </Link>
 
               <Link to="/register">
@@ -86,13 +88,20 @@ function Navbar() {
         </div>
 
         {/* IRCTC LOGO */}
-        <div>
-          <img alt="IRCTC logo" src={irctcLogo} className={styles.irctcLogo} />
-        </div>
+        <img src={irctcLogo} alt="IRCTC Logo" className={styles.irctcLogo} />
       </nav>
+
       <main>
-        <Outlet />
+        <Outlet
+          context={{
+            handleLogin,
+            handleLogout,
+            switchToLogin: () => navigate("/login"),
+            switchToRegister: () => navigate("/register"),
+          }}
+        />
       </main>
+
       <Footer />
     </>
   );

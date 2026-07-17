@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { FaGoogle, FaRegWindowClose } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
+
 import { loginWithEmail, loginWithGoogle } from "../config/authService";
 import styles from "../styles/AuthModal.module.css";
 
-function Login({ isOpen, onLogin }) {
+function Login() {
   const navigate = useNavigate();
+
+  // Receive functions from Navbar through Outlet Context
+  const { handleLogin, switchToRegister } = useOutletContext();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +18,7 @@ function Login({ isOpen, onLogin }) {
   const [loading, setLoading] = useState(false);
 
   const handleClose = () => {
-    navigate(-1);
+    navigate("/");
   };
 
   const handleEmailLogin = async (e) => {
@@ -24,12 +28,14 @@ function Login({ isOpen, onLogin }) {
     setLoading(true);
 
     try {
+      // Your Firebase function (unchanged)
       await loginWithEmail(email, password);
+
+      // Tell Navbar user is logged in
+      handleLogin();
 
       setEmail("");
       setPassword("");
-
-      if (onLogin) onLogin();
 
       handleClose();
     } catch (err) {
@@ -44,9 +50,11 @@ function Login({ isOpen, onLogin }) {
     setLoading(true);
 
     try {
+      // Your Firebase function (unchanged)
       await loginWithGoogle();
 
-      if (onLogin) onLogin();
+      // Tell Navbar user is logged in
+      handleLogin();
 
       handleClose();
     } catch (err) {
@@ -56,10 +64,8 @@ function Login({ isOpen, onLogin }) {
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className={`${styles.overlay} ${isOpen ? styles.show : ""}`}>
+    <div className={`${styles.overlay} ${styles.show}`}>
       <div className={styles.modal}>
         <button
           className={styles.closeBtn}
@@ -105,6 +111,17 @@ function Login({ isOpen, onLogin }) {
           <FaGoogle />
           <span>Login with Google</span>
         </button>
+
+        {/* Added navigation to Register */}
+        <p className={styles.switchText}>
+          Don't have an account?{" "}
+          <span
+            onClick={switchToRegister}
+            style={{ color: "#007bff", cursor: "pointer" }}
+          >
+            Register here
+          </span>
+        </p>
       </div>
     </div>
   );

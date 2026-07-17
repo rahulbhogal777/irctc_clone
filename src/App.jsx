@@ -33,11 +33,11 @@ function App() {
         },
         {
           path: "login",
-          element: <Login isOpen={true}  />,
+          element: <Login />,
         },
         {
           path: "register",
-          element: <Register isOpen={true}  />,
+          element: <Register />,
         },
       ],
     },
