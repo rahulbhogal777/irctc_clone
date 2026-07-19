@@ -1,4 +1,4 @@
-import { Children, createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 // create auth constext
 const AuthContext = createContext();
@@ -6,7 +6,7 @@ const AuthContext = createContext();
 // custom hook for authentication context
 export const useAuth = useContext(AuthContext);
 
-export const AuthProvider = ({ Children }) => {
+export const AuthProvider = ({ children }) => {
     // state to store the current authentication user
     const [currentUser, setCurrentUser] = useState(null);
     // tracking the loading status while checking for authentication
@@ -32,7 +32,7 @@ export const AuthProvider = ({ Children }) => {
 
     return (
         <AuthContext.Provider value={value}>
-            {!loading && Children}
+            {!loading && children}
         </AuthContext.Provider>
     )
 }

@@ -107,7 +107,7 @@ function Register() {
               required
             />
 
-            <button type="submit" disabled={loading}>
+            <button type="submit" disabled={loading} className={styles.loginBtn}>
               {loading ? "Registering..." : "Register"}
             </button>
           </form>
