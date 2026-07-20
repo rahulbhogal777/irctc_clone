@@ -8,9 +8,11 @@ import {
 import { BiSolidCategory } from "react-icons/bi";
 import styles from "../styles/Home.module.css";
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const today = new Date().toISOString().split('T')[0];
+  const navigate = useNavigate();
 
   return (
     <>
@@ -124,7 +126,7 @@ function Home() {
                 Search Trains
               </button>
 
-              <button type="button" className={styles.showTrainButton}>
+              <button type="button" className={styles.showTrainButton} onClick={() => navigate("/trainlist")}>
                 Show Trains
               </button>
             </div>

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import ModifySearch from "../components/ModifySearch.jsx";
 import { useAuth } from "../context/authContext.jsx";
+import styles from "../styles/TrainSearchResult.module.css";
 
 const API_URL = "https://mocki.io/v1/0eb9aeed-eb15-42e5-805c-fbf8bbee39ce"; // to fetch the train data from the mock API
 function TrainSearchResult() {
-  const { curentUser } = useAuth(); // Access the curentUser object from the authentication context
+  const { currentUser } = useAuth(); // Access the currentUser object from the authentication context
 
   const [trainData, setTrainData] = useState([]); // state to hold the fetched train data
 
@@ -83,7 +84,7 @@ function TrainSearchResult() {
           {trainData.map((train) => (
             <div className={styles.trainCard} key={train.train_number}>
               <div className={styles.trainHeader}>
-                <span>
+                <span className={styles.trainName}>
                   {train.train_name} ({train.train_number})
                 </span>
                 <span className={styles.trainSchedule}>Train Schedule</span>

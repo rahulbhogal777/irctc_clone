@@ -9,6 +9,7 @@ import Contact from "./pages/ContactPage";
 import Home from "./pages/Home";
 import Login from "./pages/LoginModal";
 import Register from "./pages/RegisterModal";
+import TrainSearchResult from "./pages/TrainSearchResult";
 
 function App() {
 
@@ -39,6 +40,10 @@ function App() {
           path: "register",
           element: <Register />,
         },
+        {
+          path: "trainlist",
+          element: <TrainSearchResult/>
+        }
       ],
     },
   ]);
