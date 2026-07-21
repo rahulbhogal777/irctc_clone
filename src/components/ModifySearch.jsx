@@ -11,6 +11,8 @@ function ModifySearch() {
     quota: "",
   });
 
+  const today = new Date().toISOString().split('T')[0];
+
   return (
     <>
       <div className={styles.searchForm}>
@@ -38,6 +40,7 @@ function ModifySearch() {
             onChange={(e) =>
               setSearchParams({ ...searchParams, date: e.target.value })
             }
+            min={today}
           />
           <select
             value={searchParams.travelClass}
