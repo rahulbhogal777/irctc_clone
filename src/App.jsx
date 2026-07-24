@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Login from "./pages/LoginModal";
 import Register from "./pages/RegisterModal";
 import TrainSearchResult from "./pages/TrainSearchResult";
+import TrainDetails from "./pages/TrainDetails";
 
 function App() {
 
@@ -43,6 +44,10 @@ function App() {
         {
           path: "trainlist",
           element: <TrainSearchResult/>
+        },
+        {
+          path: "train-detail/:train_number",
+          element: <TrainDetails/>
         }
       ],
     },

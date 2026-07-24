@@ -1,51 +1,62 @@
 //rafce
 
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaTrainSubway } from "react-icons/fa6";
+import styles from "../styles/TrainDetails.module.css";
 
-const API_URL = "https://mocki.io/v1/4582f754-3228-4f96-a2a7-3206d65fc261";
+const API_URL =
+  "https://mocki.io/v1/4582f754-3228-4f96-a2a7-3206d65fc261";
 
 const TrainDetails = () => {
-  // make an api call to fetch the train details from the API_URL and store it in a state it in a state vaiable called trainDetails
-  const [trainDetails, setTrainDetails] = useState(null);
   const { train_number } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedClass, setSelectedClass] = useState(null);
+  const navigate = useNavigate();
 
-  console.log("Fetching train details for train number:", train_number);
+  const [trainDetails, setTrainDetails] = useState(null);
+  const [selectedClass, setSelectedClass] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchTrainDetails = async () => {
       try {
-        const response = await fetch(API_URL); //list of trains is fetched from the API_URL
+        setLoading(true);
+        setError("");
+
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch train details.");
+        }
+
         const data = await response.json();
-        //find the train details for the given train_number from the data and set it in the state variable
-        const train = data.find((train) => train.train_number === train_number);
+
+        const train = data.find(
+          (item) => item.train_number === train_number
+        );
+        console.log("URL train_number:", train_number);
+        console.log(data);
+
         if (!train) {
-          throw new Error(`Train with number ${train_number} not found`);
+          throw new Error(`Train ${train_number} not found.`);
         }
+
         setTrainDetails(train);
-        // set the default selected class to the first class available in the train details
+
+        // Select first available class by default
         if (train.price && Object.keys(train.price).length > 0) {
-          setLoading(false);
+          setSelectedClass(Object.keys(train.price)[0]);
         }
-      } catch (error) {
-        console.log("Error fectching details: ", error);
-        setError(error.message);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    console.log("trainDetails", trainDetails);
-
     fetchTrainDetails();
   }, [train_number]);
-
-  // if loading is true, return a loading message
 
   if (loading) {
     return <div className={styles.loading}>Loading train details...</div>;
@@ -55,91 +66,168 @@ const TrainDetails = () => {
     return <div className={styles.error}>Error: {error}</div>;
   }
 
-  //Get source and destination from the route array
-  const source = trainDetails.route[0];
-  const destination = trainDetails.route[trainDetails.route.length - 1];
+  if (!trainDetails) {
+    return <div className={styles.error}>No train details found.</div>;
+  }
 
-  //Calculate the fare with service charge (5% of base fare)
-  const baseFare =
-    trainDetails.price && selectedClass ? trainDetails.price[selectedClass] : 0;
+  const source = trainDetails.route[0];
+  const destination =
+    trainDetails.route[trainDetails.route.length - 1];
+
+  const baseFare = selectedClass
+    ? trainDetails.price[selectedClass]
+    : 0;
+
   const serviceCharge = baseFare * 0.05;
   const totalFare = baseFare + serviceCharge;
 
   return (
     <div className={styles.container}>
-      {/* Head section with train details */}
-      <h2>
-        <FaTrainSubway />
-        {trainDetails.train_name} ({trainDetails.train_number})
+      {/* Heading */}
+      <h2 className={styles.title}>
+        <FaTrainSubway /> {trainDetails.train_name} (
+        {trainDetails.train_number})
       </h2>
 
-      {/* Days of operation */}
+      {/* Days of Operation */}
       <div className={styles.operationDays}>
-        <h3>Days of Operation:</h3>
+        <h3>Days of Operation</h3>
+
         <div className={styles.daysContainer}>
-          {trainDetails.days_of_operation.map((day, index) => (
-            <span key={index} className={styles.dayBadge}>
+          {trainDetails.days_of_operation.map((day) => (
+            <span key={day} className={styles.dayBadge}>
               {day}
             </span>
           ))}
         </div>
       </div>
 
-      {/* source and destination */}
+      {/* Journey Details */}
       <div className={styles.journeyInfo}>
         <div className={styles.journeyDetail}>
-          <span>Departure:</span>
+          <span>Departure</span>
           <strong>{trainDetails.departure_time}</strong>
         </div>
+
         <div className={styles.journeyDetail}>
-          <span>Duration:</span>
+          <span>Duration</span>
           <strong>{trainDetails.duration}</strong>
         </div>
+
         <div className={styles.journeyDetail}>
-          <span>Arrival:</span>
+          <span>Arrival</span>
           <strong>{trainDetails.arrival_time}</strong>
         </div>
       </div>
 
-      {/* Route section (progress bar) */}
+      {/* Route */}
       <div className={styles.progressBar}>
+        {/* Source */}
         <div className={`${styles.station} ${styles.source}`}>
-          <span className={styles.stationName}>{source.station_name}</span>
+          <span className={styles.stationName}>
+            {source.station_name}
+          </span>
+
           <div className={styles.timeInfo}>
             <div>Arrival: {source.arrival_time}</div>
+
             <FaTrainSubway />
+
             <div>Departure: {source.departure_time}</div>
           </div>
         </div>
 
-        {/* dynamically handle stops in between source and destination */}
+        {/* Intermediate Stations */}
         {trainDetails.route.slice(1, -1).map((station, index) => (
           <div
-            key={index}
-            className={`${styles.station} ${index % 2 == 0 ? styles.right : styles.left}`}
+            key={station.station_name}
+            className={`${styles.station} ${
+              index % 2 === 0 ? styles.right : styles.left
+            }`}
           >
-            <span className={styles.stationName}>{station.station_name}</span>
+            <span className={styles.stationName}>
+              {station.station_name}
+            </span>
+
             <div className={styles.timeInfo}>
               <div>Arrival: {station.arrival_time}</div>
+
               <FaTrainSubway />
+
               <div>Departure: {station.departure_time}</div>
             </div>
           </div>
         ))}
 
-        {/* destination stop */}
-        <div className={`${styles.station} ${styles.source}`}>
-          <span className={styles.stationName}>{destination.station_name}</span>
+        {/* Destination */}
+        <div className={`${styles.station} ${styles.destination}`}>
+          <span className={styles.stationName}>
+            {destination.station_name}
+          </span>
+
           <div className={styles.timeInfo}>
             <div>Arrival: {destination.arrival_time}</div>
+
             <FaTrainSubway />
+
             <div>Departure: {destination.departure_time}</div>
           </div>
         </div>
       </div>
 
-      {/* Price Section */}
-      
+      {/* Fare Information */}
+      {trainDetails.price && (
+        <div className={styles.priceCard}>
+          <h3>Fare Information</h3>
+
+          <div className={styles.classSelector}>
+            {Object.keys(trainDetails.price).map((classType) => (
+              <button
+                key={classType}
+                className={`${styles.classButton} ${
+                  selectedClass === classType ? styles.active : ""
+                }`}
+                onClick={() => setSelectedClass(classType)}
+              >
+                {classType}
+              </button>
+            ))}
+          </div>
+
+          <div className={styles.priceDetails}>
+            <span>Base Fare</span>
+            <span className={styles.price}>
+              ₹{baseFare.toFixed(2)}
+            </span>
+          </div>
+
+          <div className={styles.priceDetails}>
+            <span>Service Charge (5%)</span>
+            <span className={styles.price}>
+              ₹{serviceCharge.toFixed(2)}
+            </span>
+          </div>
+
+          <div className={styles.priceDetails}>
+            <strong>Total Fare</strong>
+
+            <strong className={styles.price}>
+              ₹{totalFare.toFixed(2)}
+            </strong>
+          </div>
+
+          <button className={styles.bookButton}>
+            Book Now ({selectedClass})
+          </button>
+        </div>
+      )}
+
+      <button
+        className={styles.backButton}
+        onClick={() => navigate(-1)}
+      >
+        Back
+      </button>
     </div>
   );
 };
