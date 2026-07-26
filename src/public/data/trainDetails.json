@@ -1,0 +1,483 @@
+[
+    {
+      "train_number": "12001",
+      "train_name": "New Delhi - Lucknow Shatabdi Express",
+      "source": "New Delhi (NDLS)",
+      "destination": "Lucknow Junction (LJN)",
+      "departure_time": "06:00",
+      "arrival_time": "11:30",
+      "duration": "5h 30m",
+      "days_of_operation": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "price": {
+        "SL": 450,
+        "3A": 850,
+        "2A": 1250,
+        "1A": 2200
+      },
+      "route": [
+        {
+          "station_name": "New Delhi (NDLS)",
+          "arrival_time": "N/A",
+          "departure_time": "06:00"
+        },
+        {
+          "station_name": "Ghaziabad Junction (GZB)",
+          "arrival_time": "06:30",
+          "departure_time": "06:32"
+        },
+        {
+          "station_name": "Aligarh Junction (ALJN)",
+          "arrival_time": "08:00",
+          "departure_time": "08:05"
+        },
+        {
+          "station_name": "Kanpur Central (CNB)",
+          "arrival_time": "09:45",
+          "departure_time": "09:50"
+        },
+        {
+          "station_name": "Lucknow Junction (LJN)",
+          "arrival_time": "11:30",
+          "departure_time": "N/A"
+        }
+      ]
+    },
+    {
+      "train_number": "12951",
+      "train_name": "Mumbai Central - New Delhi Rajdhani Express",
+      "source": "Mumbai Central (MMCT)",
+      "destination": "New Delhi (NDLS)",
+      "departure_time": "16:35",
+      "arrival_time": "08:15",
+      "duration": "15h 40m",
+      "days_of_operation": ["Monday", "Wednesday", "Friday", "Sunday"],
+      "price": {
+        "3A": 1800,
+        "2A": 2700,
+        "1A": 4300
+      },
+      "route": [
+        {
+          "station_name": "Mumbai Central (MMCT)",
+          "arrival_time": "N/A",
+          "departure_time": "16:35"
+        },
+        {
+          "station_name": "Surat (ST)",
+          "arrival_time": "20:10",
+          "departure_time": "20:15"
+        },
+        {
+          "station_name": "Vadodara Junction (BRC)",
+          "arrival_time": "21:40",
+          "departure_time": "21:45"
+        },
+        {
+          "station_name": "Kota Junction (KOTA)",
+          "arrival_time": "03:30",
+          "departure_time": "03:35"
+        },
+        {
+          "station_name": "New Delhi (NDLS)",
+          "arrival_time": "08:15",
+          "departure_time": "N/A"
+        }
+      ]
+    },
+    {
+      "train_number": "12627",
+      "train_name": "Karnataka Express",
+      "source": "KSR Bengaluru City Junction (SBC)",
+      "destination": "New Delhi (NDLS)",
+      "departure_time": "19:20",
+      "arrival_time": "06:20",
+      "duration": "35h",
+      "days_of_operation": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "price": {
+        "SL": 650,
+        "3A": 1450,
+        "2A": 2150,
+        "1A": 3850
+      },
+      "route": [
+        {
+          "station_name": "KSR Bengaluru City Junction (SBC)",
+          "arrival_time": "N/A",
+          "departure_time": "19:20"
+        },
+        {
+          "station_name": "Dharmavaram Junction (DMM)",
+          "arrival_time": "21:50",
+          "departure_time": "21:55"
+        },
+        {
+          "station_name": "Guntakal Junction (GTL)",
+          "arrival_time": "23:30",
+          "departure_time": "23:40"
+        },
+        {
+          "station_name": "Bhopal Junction (BPL)",
+          "arrival_time": "20:00",
+          "departure_time": "20:10"
+        },
+        {
+          "station_name": "New Delhi (NDLS)",
+          "arrival_time": "06:20",
+          "departure_time": "N/A"
+        }
+      ]
+    },
+    {
+      "train_number": "12295",
+      "train_name": "Sanghamitra Express",
+      "source": "KSR Bengaluru City Junction (SBC)",
+      "destination": "MGR Chennai Central (MAS)",
+      "departure_time": "09:15",
+      "arrival_time": "18:40",
+      "duration": "9h 25m",
+      "days_of_operation": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "price": {
+        "SL": 550,
+        "3A": 1200,
+        "2A": 1800,
+        "1A": 3200
+      },
+      "route": [
+        {
+          "station_name": "KSR Bengaluru City Junction (SBC)",
+          "arrival_time": "N/A",
+          "departure_time": "09:15"
+        },
+        {
+          "station_name": "Krishnarajapuram (KJM)",
+          "arrival_time": "09:40",
+          "departure_time": "09:42"
+        },
+        {
+          "station_name": "Jolarpettai Junction (JTJ)",
+          "arrival_time": "11:20",
+          "departure_time": "11:25"
+        },
+        {
+          "station_name": "Katpadi Junction (KPD)",
+          "arrival_time": "13:00",
+          "departure_time": "13:05"
+        },
+        {
+          "station_name": "MGR Chennai Central (MAS)",
+          "arrival_time": "18:40",
+          "departure_time": "N/A"
+        }
+      ]
+    },
+    {
+      "train_number": "12621",
+      "train_name": "Tamil Nadu Express",
+      "source": "New Delhi (NDLS)",
+      "destination": "MGR Chennai Central (MAS)",
+      "departure_time": "22:30",
+      "arrival_time": "07:10",
+      "duration": "32h 40m",
+      "days_of_operation": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "price": {
+        "SL": 700,
+        "3A": 1600,
+        "2A": 2400,
+        "1A": 4100
+      },
+      "route": [
+        {
+          "station_name": "New Delhi (NDLS)",
+          "arrival_time": "N/A",
+          "departure_time": "22:30"
+        },
+        {
+          "station_name": "Agra Cantt (AGC)",
+          "arrival_time": "01:00",
+          "departure_time": "01:05"
+        },
+        {
+          "station_name": "Nagpur Junction (NGP)",
+          "arrival_time": "15:20",
+          "departure_time": "15:30"
+        },
+        {
+          "station_name": "Vijayawada Junction (BZA)",
+          "arrival_time": "03:00",
+          "departure_time": "03:10"
+        },
+        {
+          "station_name": "MGR Chennai Central (MAS)",
+          "arrival_time": "07:10",
+          "departure_time": "N/A"
+        }
+      ]
+    },
+    {
+      "train_number": "12839",
+      "train_name": "Howrah Mail",
+      "source": "MGR Chennai Central (MAS)",
+      "destination": "Howrah Junction (HWH)",
+      "departure_time": "20:00",
+      "arrival_time": "06:30",
+      "duration": "34h 30m",
+      "days_of_operation": ["Tuesday", "Thursday", "Saturday"],
+      "price": {
+        "SL": 680,
+        "3A": 1500,
+        "2A": 2300,
+        "1A": 3900
+      },
+      "route": [
+        {
+          "station_name": "MGR Chennai Central (MAS)",
+          "arrival_time": "N/A",
+          "departure_time": "20:00"
+        },
+        {
+          "station_name": "Nellore (NLR)",
+          "arrival_time": "22:10",
+          "departure_time": "22:15"
+        },
+        {
+          "station_name": "Visakhapatnam Junction (VSKP)",
+          "arrival_time": "08:40",
+          "departure_time": "08:50"
+        },
+        {
+          "station_name": "Kharagpur Junction (KGP)",
+          "arrival_time": "04:00",
+          "departure_time": "04:05"
+        },
+        {
+          "station_name": "Howrah Junction (HWH)",
+          "arrival_time": "06:30",
+          "departure_time": "N/A"
+        }
+      ]
+    },
+    {
+      "train_number": "12723",
+      "train_name": "Telangana Express",
+      "source": "Hyderabad Deccan (HYB)",
+      "destination": "New Delhi (NDLS)",
+      "departure_time": "18:00",
+      "arrival_time": "07:45",
+      "duration": "13h 45m",
+      "days_of_operation": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "price": {
+        "SL": 500,
+        "3A": 1100,
+        "2A": 1700,
+        "1A": 3000
+      },
+      "route": [
+        {
+          "station_name": "Hyderabad Deccan (HYB)",
+          "arrival_time": "N/A",
+          "departure_time": "18:00"
+        },
+        {
+          "station_name": "Kazipet Junction (KZJ)",
+          "arrival_time": "20:10",
+          "departure_time": "20:15"
+        },
+        {
+          "station_name": "Warangal (WL)",
+          "arrival_time": "20:40",
+          "departure_time": "20:45"
+        },
+        {
+          "station_name": "Balharshah Junction (BPQ)",
+          "arrival_time": "01:30",
+          "departure_time": "01:40"
+        },
+        {
+          "station_name": "New Delhi (NDLS)",
+          "arrival_time": "07:45",
+          "departure_time": "N/A"
+        }
+      ]
+    },
+    {
+      "train_number": "12650",
+      "train_name": "Sampark Kranti Express",
+      "source": "Ernakulam Junction (ERS)",
+      "destination": "KSR Bengaluru City Junction (SBC)",
+      "departure_time": "11:45",
+      "arrival_time": "04:15",
+      "duration": "16h 30m",
+      "days_of_operation": ["Monday", "Wednesday", "Friday"],
+      "price": {
+        "SL": 620,
+        "3A": 1350,
+        "2A": 2050,
+        "1A": 3600
+      },
+      "route": [
+        {
+          "station_name": "Ernakulam Junction (ERS)",
+          "arrival_time": "N/A",
+          "departure_time": "11:45"
+        },
+        {
+          "station_name": "Thrissur (TCR)",
+          "arrival_time": "12:50",
+          "departure_time": "12:55"
+        },
+        {
+          "station_name": "Palakkad Junction (PGT)",
+          "arrival_time": "15:00",
+          "departure_time": "15:05"
+        },
+        {
+          "station_name": "Coimbatore Junction (CBE)",
+          "arrival_time": "16:00",
+          "departure_time": "16:05"
+        },
+        {
+          "station_name": "KSR Bengaluru City Junction (SBC)",
+          "arrival_time": "04:15",
+          "departure_time": "N/A"
+        }
+      ]
+    },
+    {
+      "train_number": "11057",
+      "train_name": "Amritsar Express",
+      "source": "Mumbai CSMT (CSMT)",
+      "destination": "Amritsar Junction (ASR)",
+      "departure_time": "14:20",
+      "arrival_time": "08:50",
+      "duration": "18h 30m",
+      "days_of_operation": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "price": {
+        "SL": 540,
+        "3A": 1180,
+        "2A": 1760,
+        "1A": 3100
+      },
+      "route": [
+        {
+          "station_name": "Mumbai CSMT (CSMT)",
+          "arrival_time": "N/A",
+          "departure_time": "14:20"
+        },
+        {
+          "station_name": "Nashik Road (NK)",
+          "arrival_time": "17:15",
+          "departure_time": "17:20"
+        },
+        {
+          "station_name": "Bhusaval Junction (BSL)",
+          "arrival_time": "21:10",
+          "departure_time": "21:20"
+        },
+        {
+          "station_name": "Kota Junction (KOTA)",
+          "arrival_time": "05:30",
+          "departure_time": "05:35"
+        },
+        {
+          "station_name": "Amritsar Junction (ASR)",
+          "arrival_time": "08:50",
+          "departure_time": "N/A"
+        }
+      ]
+    },
+    {
+      "train_number": "22436",
+      "train_name": "Vande Bharat Express",
+      "source": "New Delhi (NDLS)",
+      "destination": "Dehradun (DDN)",
+      "departure_time": "07:00",
+      "arrival_time": "13:00",
+      "duration": "6h",
+      "days_of_operation": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "price": {
+        "CC": 900,
+        "EC": 1800
+      },
+      "route": [
+        {
+          "station_name": "New Delhi (NDLS)",
+          "arrival_time": "N/A",
+          "departure_time": "07:00"
+        },
+        {
+          "station_name": "Meerut City (MTC)",
+          "arrival_time": "07:45",
+          "departure_time": "07:47"
+        },
+        {
+          "station_name": "Muzaffarnagar (MOZ)",
+          "arrival_time": "08:40",
+          "departure_time": "08:42"
+        },
+        {
+          "station_name": "Haridwar Junction (HW)",
+          "arrival_time": "11:00",
+          "departure_time": "11:05"
+        },
+        {
+          "station_name": "Dehradun (DDN)",
+          "arrival_time": "13:00",
+          "departure_time": "N/A"
+        }
+      ]
+    }
+]

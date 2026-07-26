@@ -2,25 +2,34 @@ import { useEffect, useState } from "react";
 import ModifySearch from "../components/ModifySearch.jsx";
 import { useAuth } from "../context/authContext.jsx";
 import styles from "../styles/TrainSearchResult.module.css";
+import { useNavigate } from "react-router-dom";
+import train_data from "../public/data/trainData.json";
 
-const API_URL = "https://mocki.io/v1/0eb9aeed-eb15-42e5-805c-fbf8bbee39ce"; // to fetch the train data from the mock API
+// const API_URL = "https://mocki.io/v1/0eb9aeed-eb15-42e5-805c-fbf8bbee39ce"; // to fetch the train data from the mock API
 function TrainSearchResult() {
   // const { currentUser } = useAuth(); // Access the currentUser object from the authentication context
-
+  const navigate = useNavigate();
   const [trainData, setTrainData] = useState([]); // state to hold the fetched train data
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Fectched train data:", data);
-        // You can set the fetched data to state here if needed
-        setTrainData(data.data);
-      })
-      .catch((error) => {
-        console.log("Error fetching train data: ", error);
-      });
+    // fetch(API_URL)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log("Fectched train data:", data);
+    //     // You can set the fetched data to state here if needed
+    //     setTrainData(data.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error fetching train data: ", error);
+    //   });
+    setTrainData(train_data);
+    
   }, []); // Empty dependency array means this effect runs once when the component mounts
+
+  const handleTrainDetailsClick = (trainNumber) => {
+    navigate(`/train-details/${trainNumber}`);
+  }
+
 
   return (
     <>
@@ -77,7 +86,7 @@ function TrainSearchResult() {
 
         {/* Train list cards */}
         <div className={styles.trainList}>
-          {(trainData.length === 0) ? (
+          {trainData.length === 0 ? (
             <div className={styles.noTrain}>
               No trains available for the selected criteria.
             </div>
@@ -119,7 +128,12 @@ function TrainSearchResult() {
                 </div>
                 <div className={styles.actionButtons}>
                   <button className={styles.bookNowButton}>Book now</button>
-                  <button className={styles.otherDatesButton}>Other Dates</button>
+                  <button
+                    className={styles.otherDatesButton}
+                    onClick={() => handleTrainDetailsClick(train.train_number)}
+                  >
+                    Other Dates
+                  </button>
                 </div>
               </div>
             ))

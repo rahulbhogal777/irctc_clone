@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaTrainSubway } from "react-icons/fa6";
 import styles from "../styles/TrainDetails.module.css";
+import train_details from "../public/data/trainDetails.json";
 
-const API_URL =
-  "https://mocki.io/v1/4582f754-3228-4f96-a2a7-3206d65fc261";
+// const API_URL =
+//   "https://mocki.io/v1/4582f754-3228-4f96-a2a7-3206d65fc261";
 
 const TrainDetails = () => {
   const { train_number } = useParams();
@@ -23,19 +24,17 @@ const TrainDetails = () => {
         setLoading(true);
         setError("");
 
-        const response = await fetch(API_URL);
+        // const response = await fetch(API_URL);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch train details.");
-        }
+        // if (!response.ok) {
+        //   throw new Error("Failed to fetch train details.");
+        // }
 
-        const data = await response.json();
+        const data = train_details;
 
         const train = data.find(
           (item) => item.train_number === train_number
         );
-        console.log("URL train_number:", train_number);
-        console.log(data);
 
         if (!train) {
           throw new Error(`Train ${train_number} not found.`);

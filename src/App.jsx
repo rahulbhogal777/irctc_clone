@@ -46,7 +46,7 @@ function App() {
           element: <TrainSearchResult/>
         },
         {
-          path: "train-detail/:train_number",
+          path: "train-details/:train_number",
           element: <TrainDetails/>
         }
       ],
