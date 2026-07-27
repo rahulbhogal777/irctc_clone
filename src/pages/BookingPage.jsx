@@ -1,9 +1,21 @@
+import { useState } from "react";
+
 function Booking() {
+
+  const [trainDetails, setTrainDetails] = useState(null);
+
   return (
     <>
-      <div style={{padding: "20px", textAlign: "center"}}>
-        <h2>Booking Page</h2>
-        <p>Select your train and proceed with booking!</p>
+      <div className={styles.container}>
+        <h2>Book Your Train Ticket </h2>
+        <div className={styles.trainSummary}>
+          <h3>Train Details</h3>
+          <div className={styles.detailsGrid}>
+            <div>
+              <strong>Train Number: </strong>{trainDetails.trainNumber}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
