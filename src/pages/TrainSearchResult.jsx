@@ -127,7 +127,12 @@ function TrainSearchResult() {
                   )}
                 </div>
                 <div className={styles.actionButtons}>
-                  <button className={styles.bookNowButton}>Book now</button>
+                  <button
+                    className={styles.bookNowButton}
+                    onClick={() => handleTrainDetailsClick(train.train_number)}
+                  >
+                    Book now
+                  </button>
                   <button
                     className={styles.otherDatesButton}
                     onClick={() => handleTrainDetailsClick(train.train_number)}

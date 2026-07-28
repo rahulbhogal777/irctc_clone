@@ -1,8 +1,10 @@
 import { field } from "firebase/firestore/pipelines";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
+import { useLocation } from "react-router-dom";
 
 function Booking() {
+  const location = useLocation();
   const currentUser = useAuth();
   const [trainDetails, setTrainDetails] = useState(null);
   const [selectedClass, setSelectedClass] = useState("");
@@ -19,6 +21,41 @@ function Booking() {
   const [contactInfo, setContactInfo] = useState({
     email: currentUser?.email || "",
     phone: "",
+  });
+
+  // check train details
+  useEffect(() => {
+    // check for detail details from navigation state
+    if (location.state?.trainNumber) {
+      // price info from navigation state
+      const priceData = location.state.price || {};
+      setClassPrice(priceData);
+
+      // get available classes
+      const classes = Object.keys(priceData);
+      setAvailableClasses(classes);
+
+      // set default value for the class (selected class)
+      const defaultClass = location.state.travelClass || classes[0];
+      setSelectedClass(defaultClass);
+
+      // set train details from navigation state
+      setTrainDetails({
+        trainNumber: location.state?.trainNumber,
+        trainName: location.state?.trainName || "NA",
+        from: location.state?.from,
+        to: location.state?.to,
+        date: location.state?.date,
+        departureTime: location.state?.departureTime,
+        arrivalTime: location.state?.arrivalTime,
+        travelClass: location.state?.travelClass,
+        duration: location.state?.duration,
+        quota: location.state?.quota || 'General',
+      });
+    } else {
+      // No train selected, you migt want to handle this case later\
+      console.log("No train details provided");
+    }
   });
 
   // handle class change for selected class
@@ -67,17 +104,24 @@ function Booking() {
       selectedClass === "Executive Class"
         ? 150 * passegerCount
         : 120 * passegerCount;
-    
+
     return {
       baseFare: totalBaseFare,
       gst,
       convenienceFee,
       cateringCharge,
-      total: totalBaseFare + gst + convenienceFee + cateringCharge
-    }
+      total: totalBaseFare + gst + convenienceFee + cateringCharge,
+    };
   };
 
   const fareDetails = calculateTotalFare();
+
+  const handleContactChange = (field, value) => {
+    setContactInfo({
+      ...contactInfo,
+      [field]: value,
+    });
+  };
 
   return (
     <>
@@ -109,11 +153,11 @@ function Booking() {
             </div>
             <div>
               <strong>Departure: </strong>
-              {trainDetails.departure_time}
+              {trainDetails.departureTime}
             </div>
             <div>
               <strong>Arrival: </strong>
-              {trainDetails.arrival_time}
+              {trainDetails.arrivalTime}
             </div>
             <div>
               <strong>Duration: </strong>
@@ -308,7 +352,9 @@ function Booking() {
 
           {/*  payment proceed button*/}
           <div className={styles.buttonGroup}>
-            <button type="submit" className={style.payButton}>Proceed to Payment</button>
+            <button type="submit" className={styles.payButton}>
+              Proceed to Payment
+            </button>
           </div>
         </form>
       </div>
