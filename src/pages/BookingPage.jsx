@@ -2,6 +2,7 @@ import { field } from "firebase/firestore/pipelines";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
 import { useLocation } from "react-router-dom";
+import styles from "../styles/BookingPage.module.css";
 
 function Booking() {
   const location = useLocation();
