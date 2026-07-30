@@ -24,6 +24,7 @@ function Booking() {
     phone: "",
   });
 
+  console.log(location);
   // check train details
   useEffect(() => {
     // check for detail details from navigation state
@@ -134,7 +135,7 @@ function Booking() {
           <div className={styles.detailsGrid}>
             <div>
               <strong>Train Number: </strong>
-              {trainDetails.trainNumber}
+              {trainDetails.train_number}
             </div>
             <div>
               <strong>Train Name: </strong>
