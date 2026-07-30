@@ -1,75 +1,209 @@
 .container {
-    display: flex;
-    width: 100%;
-    padding: 20px;
-    background-color: #f5f5f5;
-    
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  padding: 20px;
+  background: #f5f5f5;
+  box-sizing: border-box;
 }
+
+/* ================= Filter Section ================= */
 
 .filterSection {
-    width: 25%;
-    background-color: #fff;
-    padding: 12px;
-    margin-right: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 260px;
+  min-width: 260px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  height: fit-content;
 }
 
-.filterColumn{
-    margin-bottom: 20px;
+.filterColumn {
+  margin-bottom: 24px;
+}
 
+.filterColumn h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #333;
 }
 
 .checkboxLabel {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 15px;
 }
 
-.checkboxLabel input{
-    margin-right: 10px; 
+.checkboxLabel input {
+  margin-right: 10px;
+  cursor: pointer;
 }
+
+/* ================= Train List ================= */
 
 .trainList {
-    flex-grow: 1;
+  flex: 1;
 }
+
+.noTrain {
+  background: white;
+  padding: 30px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 18px;
+  color: gray;
+}
+
+/* ================= Train Card ================= */
 
 .trainCard {
-    background-color: #fff;
-    padding: 14px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: white;
+  padding: 18px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
-.trainHeader{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
+.trainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
 }
 
-.trainName{
-   font-weight: bold;
+.trainName {
+  font-size: 20px;
+  font-weight: 600;
 }
 
-.trainSchedule{
-    color: rgb(0, 81, 255);
-    cursor: pointer;
+.trainSchedule {
+  color: #0066ff;
+  cursor: pointer;
+  font-weight: 500;
 }
 
-.trainDetails{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+.trainSchedule:hover {
+  text-decoration: underline;
 }
 
-.timeInfo{
-    display: flex;
+/* ================= Train Details ================= */
+
+.trainDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.timeInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeInfo span:first-child {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.timeInfo span:last-child {
+  color: gray;
+  margin-top: 4px;
+}
+
+.durationInfo {
+  color: #666;
+  font-size: 15px;
+}
+
+/* ================= Available Classes ================= */
+
+.classInfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.classInfo span {
+  padding: 8px 14px;
+  background: #eef5ff;
+  border: 1px solid #d2e3ff;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ================= Buttons ================= */
+
+.actionButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.bookNowButton,
+.otherDatesButton {
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.bookNowButton {
+  background: #fb792b;
+  color: white;
+}
+
+.bookNowButton:hover {
+  background: #e6681d;
+}
+
+.otherDatesButton {
+  background: #ffffff;
+  border: 1px solid #0066ff;
+  color: #0066ff;
+}
+
+.otherDatesButton:hover {
+  background: #0066ff;
+  color: white;
+}
+
+/* ================= Responsive ================= */
+
+@media (max-width: 900px) {
+  .container {
     flex-direction: column;
-    align-items: center;
-}
+  }
 
-.durationInfo{
-    color: gray;
+  .filterSection {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .trainHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .trainDetails {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+  }
+
+  .bookNowButton,
+  .otherDatesButton {
+    width: 100%;
+  }
 }
