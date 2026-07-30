@@ -27,7 +27,7 @@ function Booking() {
   // check train details
   useEffect(() => {
     // check for detail details from navigation state
-    if (location.state?.trainNumber) {
+    if (location.state?.train_number) {
       // price info from navigation state
       const priceData = location.state.price || {};
       setClassPrice(priceData);
@@ -42,7 +42,7 @@ function Booking() {
 
       // set train details from navigation state
       setTrainDetails({
-        trainNumber: location.state?.trainNumber,
+        trainNumber: location.state?.train_number,
         trainName: location.state?.trainName || "NA",
         from: location.state?.from,
         to: location.state?.to,
@@ -51,7 +51,7 @@ function Booking() {
         arrivalTime: location.state?.arrivalTime,
         travelClass: location.state?.travelClass,
         duration: location.state?.duration,
-        quota: location.state?.quota || 'General',
+        quota: location.state?.quota || "General",
       });
     } else {
       // No train selected, you migt want to handle this case later\
