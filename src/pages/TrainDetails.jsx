@@ -69,6 +69,9 @@ const TrainDetails = () => {
     return <div className={styles.error}>No train details found.</div>;
   }
 
+  const handleBooking = () => {
+  }
+
   const source = trainDetails.route[0];
   const destination =
     trainDetails.route[trainDetails.route.length - 1];
@@ -84,8 +87,8 @@ const TrainDetails = () => {
     <div className={styles.container}>
       {/* Heading */}
       <h2 className={styles.title}>
-        <FaTrainSubway /> {trainDetails.train_name} (
-        {trainDetails.train_number})
+        <FaTrainSubway /> {trainDetails.train_name} ({trainDetails.train_number}
+        )
       </h2>
 
       {/* Days of Operation */}
@@ -123,9 +126,7 @@ const TrainDetails = () => {
       <div className={styles.progressBar}>
         {/* Source */}
         <div className={`${styles.station} ${styles.source}`}>
-          <span className={styles.stationName}>
-            {source.station_name}
-          </span>
+          <span className={styles.stationName}>{source.station_name}</span>
 
           <div className={styles.timeInfo}>
             <div>Arrival: {source.arrival_time}</div>
@@ -144,9 +145,7 @@ const TrainDetails = () => {
               index % 2 === 0 ? styles.right : styles.left
             }`}
           >
-            <span className={styles.stationName}>
-              {station.station_name}
-            </span>
+            <span className={styles.stationName}>{station.station_name}</span>
 
             <div className={styles.timeInfo}>
               <div>Arrival: {station.arrival_time}</div>
@@ -160,9 +159,7 @@ const TrainDetails = () => {
 
         {/* Destination */}
         <div className={`${styles.station} ${styles.destination}`}>
-          <span className={styles.stationName}>
-            {destination.station_name}
-          </span>
+          <span className={styles.stationName}>{destination.station_name}</span>
 
           <div className={styles.timeInfo}>
             <div>Arrival: {destination.arrival_time}</div>
@@ -195,36 +192,27 @@ const TrainDetails = () => {
 
           <div className={styles.priceDetails}>
             <span>Base Fare</span>
-            <span className={styles.price}>
-              ₹{baseFare.toFixed(2)}
-            </span>
+            <span className={styles.price}>₹{baseFare.toFixed(2)}</span>
           </div>
 
           <div className={styles.priceDetails}>
             <span>Service Charge (5%)</span>
-            <span className={styles.price}>
-              ₹{serviceCharge.toFixed(2)}
-            </span>
+            <span className={styles.price}>₹{serviceCharge.toFixed(2)}</span>
           </div>
 
           <div className={styles.priceDetails}>
             <strong>Total Fare</strong>
 
-            <strong className={styles.price}>
-              ₹{totalFare.toFixed(2)}
-            </strong>
+            <strong className={styles.price}>₹{totalFare.toFixed(2)}</strong>
           </div>
 
-          <button className={styles.bookButton}>
+          <button className={styles.bookButton} onClick={() => navigate(-1)}>
             Book Now ({selectedClass})
           </button>
         </div>
       )}
 
-      <button
-        className={styles.backButton}
-        onClick={() => navigate(-1)}
-      >
+      <button className={styles.backButton} onClick={handleBooking}>
         Back
       </button>
     </div>
