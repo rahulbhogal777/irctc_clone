@@ -2,6 +2,8 @@
   {
     "train_number": "12001",
     "train_name": "Shatabdi Express",
+    "source": "Delhi",
+    "destination": "Lucknow",
     "departure_time": "06:00",
     "arrival_time": "11:30",
     "duration": "5h 30m",
@@ -38,6 +40,8 @@
   {
     "train_number": "12951",
     "train_name": "Mumbai Rajdhani",
+    "source": "Mumbai",
+    "destination": "New Delhi",
     "departure_time": "16:35",
     "arrival_time": "08:15",
     "duration": "15h 40m",
@@ -45,7 +49,7 @@
     "price": { "3A": 1800, "2A": 2700, "1A": 4300 },
     "route": [
       {
-        "station_name": "Mumbai Central",
+        "station_name": "Mumbai",
         "arrival_time": "--",
         "departure_time": "16:35"
       },
@@ -74,6 +78,8 @@
   {
     "train_number": "12627",
     "train_name": "Karnataka Express",
+    "source": "Bengaluru",
+    "destination": "New Delhi",
     "departure_time": "19:20",
     "arrival_time": "06:20",
     "duration": "35h",
@@ -110,6 +116,8 @@
   {
     "train_number": "12295",
     "train_name": "Sanghamitra Express",
+    "source": "Bengaluru",
+    "destination": "Chennai",
     "departure_time": "09:15",
     "arrival_time": "18:40",
     "duration": "9h 25m",
@@ -146,6 +154,8 @@
   {
     "train_number": "12621",
     "train_name": "Tamil Nadu Express",
+    "source": "Delhi",
+    "destination": "Chennai",
     "departure_time": "22:30",
     "arrival_time": "07:10",
     "duration": "32h 40m",
@@ -182,6 +192,8 @@
   {
     "train_number": "12839",
     "train_name": "Howrah Mail",
+    "source": "Chennai",
+    "destination": "Howrah",
     "departure_time": "20:00",
     "arrival_time": "06:30",
     "duration": "34h 30m",
@@ -218,6 +230,8 @@
   {
     "train_number": "12723",
     "train_name": "Telangana Express",
+    "source": "Hyderabad",
+    "destination": "Delhi",
     "departure_time": "18:00",
     "arrival_time": "07:45",
     "duration": "13h 45m",
@@ -254,6 +268,8 @@
   {
     "train_number": "12650",
     "train_name": "Sampark Kranti Express",
+    "source": "Ernakulam",
+    "destination": "Bengaluru",
     "departure_time": "11:45",
     "arrival_time": "04:15",
     "duration": "16h 30m",
@@ -290,6 +306,8 @@
   {
     "train_number": "11057",
     "train_name": "Amritsar Express",
+    "source": "Mumbai",
+    "destination": "Amritsar",
     "departure_time": "14:20",
     "arrival_time": "08:50",
     "duration": "18h 30m",
@@ -326,6 +344,8 @@
   {
     "train_number": "22436",
     "train_name": "Vande Bharat Express",
+    "source": "Delhi",
+    "destination": "Dehradun",
     "departure_time": "07:00",
     "arrival_time": "13:00",
     "duration": "6h",

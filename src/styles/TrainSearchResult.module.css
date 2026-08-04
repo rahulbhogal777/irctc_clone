@@ -110,7 +110,7 @@
 }
 
 .timeInfo span:last-child {
-  color: gray;
+  color: rgb(33, 29, 29);
   margin-top: 4px;
 }
 

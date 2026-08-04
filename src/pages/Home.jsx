@@ -21,7 +21,22 @@ function Home() {
   const [travelClass, setTravelClass] = useState("All Classes");
   const [quota, setQuota] = useState("General");
 
-  const handleSwapStations = () => {};
+  const handleSwapStations = () => {
+    const temp = to;
+    setTo(from);
+    setFrom(temp);
+  };
+
+  const handleSearchTrains = (e) => {
+    e.preventDefault();
+
+    if (!from || !to) {
+      alert("Please fill both source and destination.");
+    }
+    navigate(
+      `/trainlist?form=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&date=${date}&class=${encodeURIComponent(travelClass)}&quota=${encodeURIComponent(quota)}`,
+    );
+  };
 
   return (
     <>
@@ -148,7 +163,11 @@ function Home() {
 
             {/* Buttons */}
             <div className={styles.buttonGroup}>
-              <button type="submit" className={styles.searchButton}>
+              <button
+                type="submit"
+                className={styles.searchButton}
+                onClick={handleSearchTrains}
+              >
                 Search Trains
               </button>
 
@@ -157,7 +176,7 @@ function Home() {
                 className={styles.showTrainButton}
                 onClick={() => navigate("/trainlist")}
               >
-                Show Trains
+                Show All Trains
               </button>
             </div>
           </form>

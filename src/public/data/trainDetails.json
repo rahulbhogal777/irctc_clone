@@ -2,8 +2,8 @@
     {
       "train_number": "12001",
       "train_name": "New Delhi - Lucknow Shatabdi Express",
-      "source": "New Delhi (NDLS)",
-      "destination": "Lucknow Junction (LJN)",
+      "source": "Delhi",
+      "destination": "Lucknow",
       "departure_time": "06:00",
       "arrival_time": "11:30",
       "duration": "5h 30m",
@@ -52,8 +52,8 @@
     {
       "train_number": "12951",
       "train_name": "Mumbai Central - New Delhi Rajdhani Express",
-      "source": "Mumbai Central (MMCT)",
-      "destination": "New Delhi (NDLS)",
+      "source": "Mumbai Central",
+      "destination": "New Delhi",
       "departure_time": "16:35",
       "arrival_time": "08:15",
       "duration": "15h 40m",
