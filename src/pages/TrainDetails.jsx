@@ -32,9 +32,7 @@ const TrainDetails = () => {
 
         const data = train_details;
 
-        const train = data.find(
-          (item) => item.train_number === train_number
-        );
+        const train = data.find((item) => item.train_number === train_number);
 
         if (!train) {
           throw new Error(`Train ${train_number} not found.`);
@@ -57,6 +55,7 @@ const TrainDetails = () => {
     fetchTrainDetails();
   }, [train_number]);
 
+  // If loading is true, return a loading message
   if (loading) {
     return <div className={styles.loading}>Loading train details...</div>;
   }
@@ -70,15 +69,40 @@ const TrainDetails = () => {
   }
 
   const handleBooking = () => {
-  }
+    if (!trainDetails || !selectedClass) return;
 
+    // create a formatted date for today (app state)
+    const today = new Date();
+    const formattedDate = `${today.getDate()}/${today.getDate() + 1}/${today.getFullYear()}`;
+
+    // get source and destination station name
+    const source = trainDetails.route[0].station_name;
+    const destination =
+      trainDetails.route[trainDetails.route.length - 1].station_name;
+
+    //navigate to booking with train details formatted to match bookingPage component
+    navigate("/booking", {
+      state: {
+        trainNumber: trainDetails.train_number,
+        trainName: trainDetails.train_name,
+        from: source,
+        to: destination,
+        date: formattedDate,
+        departureTime: trainDetails.departure_time,
+        arrivalTime: trainDetails.arrival_time,
+        travelClass: selectedClass,
+        duration: trainDetails.duration,
+        quota: "General",
+        price: trainDetails.price,
+      },
+    });
+  };
+
+  // Get Source and destination from the route array
   const source = trainDetails.route[0];
-  const destination =
-    trainDetails.route[trainDetails.route.length - 1];
+  const destination = trainDetails.route[trainDetails.route.length - 1];
 
-  const baseFare = selectedClass
-    ? trainDetails.price[selectedClass]
-    : 0;
+  const baseFare = selectedClass ? trainDetails.price[selectedClass] : 0;
 
   const serviceCharge = baseFare * 0.05;
   const totalFare = baseFare + serviceCharge;
@@ -206,17 +230,17 @@ const TrainDetails = () => {
             <strong className={styles.price}>₹{totalFare.toFixed(2)}</strong>
           </div>
 
-          <button className={styles.bookButton} onClick={() => navigate(-1)}>
+          <button className={styles.bookButton} onClick={handleBooking}>
             Book Now ({selectedClass})
           </button>
         </div>
       )}
 
-      <button className={styles.backButton} onClick={handleBooking}>
+      <button className={styles.backButton} onClick={() => navigate(-1)}>
         Back
       </button>
     </div>
   );
-};
+};;;
 
 export default TrainDetails;

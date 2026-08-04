@@ -24,13 +24,14 @@ function Booking() {
     phone: "",
   });
 
-  console.log(location);
+  console.log("location: ",location);
+  console.log("state: ",location.state);
   // check train details
   useEffect(() => {
     // check for detail details from navigation state
-    if (location.state?.train_number) {
+    if (location.state?.trainNumber) {
       // price info from navigation state
-      const priceData = location.state.price || {};
+      const priceData = location.state?.price || {};
       setClassPrice(priceData);
 
       // get available classes
@@ -38,12 +39,15 @@ function Booking() {
       setAvailableClasses(classes);
 
       // set default value for the class (selected class)
-      const defaultClass = location.state.travelClass || classes[0];
-      setSelectedClass(defaultClass);
+      if (classes.length > 0) {
+        const defaultClass = location.state?.travelClass || classes[0];
+        setSelectedClass(defaultClass);
+      }
+      
 
       // set train details from navigation state
       setTrainDetails({
-        trainNumber: location.state?.train_number,
+        trainNumber: location.state?.trainNumber,
         trainName: location.state?.trainName || "NA",
         from: location.state?.from,
         to: location.state?.to,
@@ -58,7 +62,7 @@ function Booking() {
       // No train selected, you migt want to handle this case later\
       console.log("No train details provided");
     }
-  });
+  },[location.state]);
 
   // handle class change for selected class
   const handleClassChange = (e) => {
@@ -135,7 +139,7 @@ function Booking() {
           <div className={styles.detailsGrid}>
             <div>
               <strong>Train Number: </strong>
-              {trainDetails.train_number}
+              {trainDetails.trainNumber}
             </div>
             <div>
               <strong>Train Name: </strong>
