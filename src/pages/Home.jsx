@@ -15,6 +15,14 @@ function Home() {
   const today = new Date().toISOString().split("T")[0];
   const navigate = useNavigate();
 
+  // const getMaxDate = () => {
+  //   const maxDate = new Date();
+  //   maxDate.setMonth(maxDate.getMonth() + 3);
+  //   console.log(maxDate.toISOString().split("T")[0])
+  //   return maxDate.toISOString().split("T")[0];
+  // };
+  const getMaxDate = new Date(new Date().setMonth(new Date().getMonth() + 3)).toISOString().split("T")[0];
+
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [date, setDate] = useState("");
@@ -34,7 +42,7 @@ function Home() {
       alert("Please fill both source and destination.");
     }
     navigate(
-      `/trainlist?form=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&date=${date}&class=${encodeURIComponent(travelClass)}&quota=${encodeURIComponent(quota)}`,
+      `/trainlist?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&date=${date}&class=${encodeURIComponent(travelClass)}&quota=${encodeURIComponent(quota)}`,
     );
   };
 
@@ -98,6 +106,7 @@ function Home() {
                   id="date"
                   name="date"
                   min={today}
+                  max={getMaxDate}
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
                   required

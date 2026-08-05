@@ -1,17 +1,51 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/ModifySearch.module.css";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function ModifySearch() {
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const navigate = useNavigate();
+
   // State to manage the search parameters
   const [searchParams, setSearchParams] = useState({
     from: "",
     to: "",
     date: "",
     travelClass: "",
-    quota: "",
+    quota: "General",
   });
 
-  const today = new Date().toISOString().split('T')[0];
+  const location = useLocation();
+
+  // extract/get values from the URL params
+  useEffect(() => {
+    const query = new URLSearchParams(location.search);
+    setSearchParams({
+      from: query.get("from") || "",
+      to: query.get("to") || "",
+      date: query.get("date") || "",
+      travelClass: query.get("class") || "General",
+      quota: query.get("quota") || "",
+    });
+  }, [location.search]);
+
+  //handle modify search
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    //basic validations
+    if (!searchParams.to || !searchParams.from) {
+      alert("Please enter both source and destination stations")
+      return;
+    }
+
+    navigate(
+      `/trainlist?from=${encodeURIComponent(searchParams.from)}&to=${encodeURIComponent(searchParams.to)}&date=${searchParams.date}&class=${encodeURIComponent(searchParams.travelClass)}&quota=${encodeURIComponent(searchParams.quota)}`,
+    );
+
+  }
 
   return (
     <>
@@ -68,7 +102,7 @@ function ModifySearch() {
             <option value="duty pass">Duty Pass</option>
           </select>
 
-          <button type="sumbit">Search</button>
+          <button type="sumbit" onClick={handleSearch}>Search</button>
         </form>
       </div>
     </>
