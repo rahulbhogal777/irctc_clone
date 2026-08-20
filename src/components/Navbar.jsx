@@ -11,6 +11,7 @@ import Footer from "./Footer";
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
+  
 
   const navigate = useNavigate();
 
@@ -68,7 +69,7 @@ function Navbar() {
         <div className={styles.authSection}>
           {isLoggedIn ? (
             <>
-              <span className={styles.welcome}>Welcome User</span>
+              <span className={styles.welcome}>Welcome! {localStorage.getItem('userName') }</span>
 
               <button className={styles.authButton} onClick={handleLogout}>
                 Logout

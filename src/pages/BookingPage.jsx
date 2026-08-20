@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
 import { useLocation } from "react-router-dom";
 import styles from "../styles/BookingPage.module.css";
+import { db } from "../config/firebaseConfig";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 function Booking() {
   const location = useLocation();
@@ -129,6 +131,40 @@ function Booking() {
     });
   };
 
+  // handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // validate form date (passanger, contactInfo)
+    const isFormDataValid = passengers.every(p => p.name && p.age && p.gender) && contactInfo.email && contactInfo.phone;
+    if (!isFormDataValid) {
+      alert("Please fill up the right details");
+      return;
+    }
+
+    // create booking data in the database
+    try {
+      // In real app, you would submit booking info to the backend server
+      const bookingData = {
+        userId: currentUser.uid,
+        trainDetails: {
+          ...trainDetails,
+          travelClass: selectedClass
+        },
+        passengers: passengers,
+        contactInfo: contactInfo,
+        paymentSummary: calculateTotalFare(),
+        status: "confirmed",
+        createdAt: serverTimestamp()  // function to get current timestap from server
+      }
+
+      // store booking data into database
+    } catch (error) {
+      
+    }
+
+  }
+
   return (
     <>
       <div className={styles.container}>
@@ -195,7 +231,7 @@ function Booking() {
         </div>
 
         {/* Passenger detail */}
-        <form>
+        <form onSubmit={}>
           <div className={styles.passengerSection}>
             <h3>Passenger Details</h3>
             {passengers.map((passenger, index) => (

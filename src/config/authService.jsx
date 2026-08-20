@@ -19,6 +19,7 @@ export const registerUserWithEmail = async (fullName, email, password) => {
     );
     // Update the user's display name
     await updateProfile(userCredential.user, { displayName: fullName });
+    
     return userCredential.user;
   } catch (error) {
     const errorCode = error.code;
@@ -36,7 +37,9 @@ export const loginWithEmail = async (email, password) => {
       email,
       password,
     );
+    localStorage.setItem('userName', userCredential.user.displayName);
     return userCredential.user;
+
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -49,6 +52,7 @@ export const loginWithEmail = async (email, password) => {
 export const loginWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
+    localStorage.setItem("userName", result.user.displayName);
     return result.user;
   } catch (error) {
     const errorCode = error.code;
@@ -61,7 +65,9 @@ export const loginWithGoogle = async () => {
 // Logout the loggegin user
 export const logout = async () => {
   try {
+    localStorage.removeItem("userName");
     await signOut(auth);
+    
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;
