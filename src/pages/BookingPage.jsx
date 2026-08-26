@@ -1,7 +1,7 @@
 import { field } from "firebase/firestore/pipelines";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../styles/BookingPage.module.css";
 import { db } from "../config/firebaseConfig";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -9,6 +9,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 function Booking() {
   const location = useLocation();
   const currentUser = useAuth();
+  const navigate = useNavigate(); 
   const [trainDetails, setTrainDetails] = useState(null);
   const [selectedClass, setSelectedClass] = useState("");
   const [availableClasses, setAvailableClasses] = useState([]);
@@ -132,7 +133,7 @@ function Booking() {
   };
 
   // handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     // validate form date (passanger, contactInfo)
@@ -159,8 +160,21 @@ function Booking() {
       }
 
       // store booking data into database
+      const bookingRef = collection(db, 'bookings');
+      const docRef = await addDoc(bookingRef, bookingData);
+      console.log("bookingData", bookingData);
+      alert("Booking submitted successfully!");
+
+      // redirect user to payment/confirmation page
+      navigate('/booking-confirmation', {
+        state: {
+          bookingId: docRef.id,
+          bookingDetails: bookingData,
+        }
+      });
     } catch (error) {
-      
+      console.log("Error saving booking data to firebase: ", error);
+      alert("Error confirming booking. Please try again later")
     }
 
   }
@@ -231,7 +245,7 @@ function Booking() {
         </div>
 
         {/* Passenger detail */}
-        <form onSubmit={}>
+        <form onSubmit={handleSubmit}>
           <div className={styles.passengerSection}>
             <h3>Passenger Details</h3>
             {passengers.map((passenger, index) => (

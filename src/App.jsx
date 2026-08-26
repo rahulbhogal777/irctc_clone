@@ -11,6 +11,7 @@ import Login from "./pages/LoginModal";
 import Register from "./pages/RegisterModal";
 import TrainSearchResult from "./pages/TrainSearchResult";
 import TrainDetails from "./pages/TrainDetails";
+import BookingConfirmationPage from "./pages/BookingConfirmationPage";
 
 function App() {
 
@@ -43,12 +44,16 @@ function App() {
         },
         {
           path: "trainlist",
-          element: <TrainSearchResult/>
+          element: <TrainSearchResult />,
+        },
+        {
+          path: "booking-confirmation",
+          element: <BookingConfirmationPage />,
         },
         {
           path: "train-details/:train_number",
-          element: <TrainDetails/>
-        }
+          element: <TrainDetails />,
+        },
       ],
     },
   ]);
