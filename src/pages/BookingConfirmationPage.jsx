@@ -40,7 +40,7 @@ const BookingConfirmationPage = () => {
 
       {/* train details section */}
       <div className={styles.section}>
-        <h3>Traiun Details</h3>
+        <h3>Train Details</h3>
         <div className={styles.trainInfo}>
           <div className={styles.trainName}>
             <strong>{bookingDetails.trainDetails?.trainName}</strong>(
@@ -67,7 +67,7 @@ const BookingConfirmationPage = () => {
               </span>
             </div>
             <div className={styles.additionalInfo}>
-              <div>Dtae: {bookingDetails.trainDetails?.date}</div>
+              <div>Date: {bookingDetails.trainDetails?.date}</div>
               <div>Class: {bookingDetails.trainDetails?.travelClass}</div>
               <div>Duration: {bookingDetails.trainDetails?.duration}</div>
             </div>
@@ -88,12 +88,14 @@ const BookingConfirmationPage = () => {
           </thead>
           <tbody>
             {bookingDetails.passengers.map((passenger, index) => {
-              <tr key={index}>
-                <td>{passenger.name}</td>
-                <td>{passenger.age}</td>
-                <td>{passenger.gender}</td>
-                <td>{passenger.berth}</td>
-              </tr>;
+              return (
+                <tr key={index}>
+                  <td>{passenger.name}</td>
+                  <td>{passenger.age}</td>
+                  <td>{passenger.gender}</td>
+                  <td>{passenger.berth}</td>
+                </tr>
+              );
             })}
           </tbody>
         </table>
@@ -102,7 +104,7 @@ const BookingConfirmationPage = () => {
       <div className={styles.section}>
         <h3>Contact Information</h3>
         <div className={styles.contactInfo}>
-          <diV>Email: {bookingDetails.contactInfo.email}</diV>
+          <div>Email: {bookingDetails.contactInfo.email}</div>
           <div>Phone: {bookingDetails.contactInfo.phone}</div>
         </div>
       </div>
