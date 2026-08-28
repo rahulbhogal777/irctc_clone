@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../context/authContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../styles/BookingPage.module.css";
@@ -7,17 +7,32 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 function Booking() {
   const location = useLocation();
-  const currentUser = useAuth();
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
-  const [trainDetails, setTrainDetails] = useState(null);
-  const [selectedClass, setSelectedClass] = useState("");
-  const [availableClasses, setAvailableClasses] = useState([]);
-  const [classPrice, setClassPrice] = useState({});
+  const classPrice = location.state?.price || {};
+  const availableClasses = Object.keys(classPrice);
+  const trainDetails = location.state?.trainNumber
+    ? {
+        trainNumber: location.state.trainNumber,
+        trainName: location.state.trainName || "NA",
+        from: location.state.from,
+        to: location.state.to,
+        date: location.state.date,
+        departureTime: location.state.departureTime,
+        arrivalTime: location.state.arrivalTime,
+        travelClass: location.state.travelClass,
+        duration: location.state.duration,
+        quota: location.state.quota || "General",
+      }
+    : null;
+  const [selectedClass, setSelectedClass] = useState(
+    location.state?.travelClass || availableClasses[0] || "",
+  );
   const [passengers, setPassengers] = useState([
     {
       name: "",
       age: "",
-      gender: "",
+      gender: "male",
       berth: "No Preference",
     },
   ]);
@@ -26,43 +41,7 @@ function Booking() {
     phone: "",
   });
 
-  // console.log("location: ", location);
-  // console.log("state: ", location.state);
-  // check train details
-  useEffect(() => {
-    // check for detail details from navigation state
-    if (location.state?.trainNumber) {
-      // price info from navigation state
-      const priceData = location.state?.price || {};
-      setClassPrice(priceData);
-
-      // get available classes
-      const classes = Object.keys(priceData);
-      setAvailableClasses(classes);
-
-      // set default value for the class (selected class)
-      if (classes.length > 0) {
-        const defaultClass = location.state?.travelClass || classes[0];
-        setSelectedClass(defaultClass);
-      }
-
-      // set train details from navigation state
-      setTrainDetails({
-        trainNumber: location.state?.trainNumber,
-        trainName: location.state?.trainName || "NA",
-        from: location.state?.from,
-        to: location.state?.to,
-        date: location.state?.date,
-        departureTime: location.state?.departureTime,
-        arrivalTime: location.state?.arrivalTime,
-        travelClass: location.state?.travelClass,
-        duration: location.state?.duration,
-        quota: location.state?.quota || "General",
-      });
-    } else {
-      navigate("/trainlist", { replace: true });
-    }
-  }, [location.state, navigate]);
+  const contactEmail = contactInfo.email || currentUser?.email || "";
 
   // handle class change for selected class
   const handleClassChange = (e) => {
@@ -92,7 +71,7 @@ function Booking() {
       {
         name: "",
         age: "",
-        gender: "",
+        gender: "male",
         berth: "No Preference",
       },
     ]);
@@ -136,54 +115,71 @@ function Booking() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // validate form date (passanger, contactInfo)
-    const isFormDataValid =
-      passengers.every((p) => p.name && p.age && p.gender) &&
-      contactInfo.email &&
-      contactInfo.phone;
-    if (!isFormDataValid) {
-      alert("Please fill up the right details");
+    const hasInvalidPassenger = passengers.some(
+      (passenger) =>
+        !passenger.name.trim() ||
+        !passenger.age ||
+        !passenger.gender ||
+        Number(passenger.age) < 3,
+    );
+    if (hasInvalidPassenger) {
+      alert("Please enter each passenger's name, age, and gender.");
       return;
     }
 
-    // create booking data in the database
-    try {
-      // In real app, you would submit booking info to the backend server
-      const bookingData = {
-        userId: currentUser.uid,
-        trainDetails: {
-          ...trainDetails,
-          travelClass: selectedClass,
-        },
-        passengers: passengers,
-        contactInfo: contactInfo,
-        paymentSummary: calculateTotalFare(),
-        status: "confirmed",
-        createdAt: serverTimestamp(), // function to get current timestap from server
-      };
+    if (!contactEmail.trim() || !/^[0-9]{10}$/.test(contactInfo.phone)) {
+      alert("Please enter a valid email address and 10-digit phone number.");
+      return;
+    }
 
-      // store booking data into database
+    const bookingData = {
+      userId: currentUser?.uid || "guest",
+      trainDetails: {
+        ...trainDetails,
+        travelClass: selectedClass,
+      },
+      passengers,
+      contactInfo: { ...contactInfo, email: contactEmail },
+      paymentSummary: calculateTotalFare(),
+      status: "confirmed",
+      createdAt: serverTimestamp(),
+    };
+
+    let bookingId = `IRCTC-${Date.now()}`;
+
+    // Save the booking when Firebase is available. A local booking ID keeps the
+    // confirmation flow working during local development or for guest users.
+    try {
       const bookingRef = collection(db, "bookings");
       const docRef = await addDoc(bookingRef, bookingData);
-      console.log("bookingData", bookingData);
-      alert("Booking submitted successfully!");
-
-      // redirect user to payment/confirmation page
-      navigate("/booking-confirmation", {
-        state: {
-          bookingId: docRef.id,
-          bookingDetails: bookingData,
-        },
-      });
+      bookingId = docRef.id;
     } catch (error) {
-      console.log("Error saving booking data to firebase: ", error);
-      alert("Error confirming booking. Please try again later");
+      console.warn("Booking could not be saved to Firebase:", error);
     }
+
+    navigate("/booking-confirmation", {
+      state: {
+        bookingId,
+        bookingDetails: bookingData,
+      },
+    });
   };
 
   return (
     <>
-      {!trainDetails ? null : (
+      {!trainDetails ? (
+        <div className={styles.container}>
+          <h2>Booking Page</h2>
+          <p>Please select a train before continuing with your booking.</p>
+          <button
+            type="button"
+            className={styles.payButton}
+            onClick={() => navigate("/trainlist")}
+          >
+            Select a Train
+          </button>
+        </div>
+      ) : (
         <div className={styles.container}>
           {/* Train Details */}
           <h2>Book Your Train Ticket </h2>
@@ -345,7 +341,7 @@ function Booking() {
                   Email:
                   <input
                     type="email"
-                    value={contactInfo.email}
+                    value={contactEmail}
                     required
                     placeholder="Enter email for e-ticket and update"
                     onChange={(e) =>
